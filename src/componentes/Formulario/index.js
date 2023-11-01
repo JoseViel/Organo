@@ -2,27 +2,67 @@ import './style.css'
 import CampoTexto from '../CampoTexto';
 import ListaSuspensa from '../ListaSuspensa';
 import Botao from '../Botao';
+import { useState } from 'react'
 
-const Formulario = () =>{
+const Formulario = (props) =>{
 
     const times = [
+        'Fullstack',
         'Backend',
         'Frontend',
         'UI/UX',
         'Devops',
         'Engenheiro de Software',
         'QA',
-        'Mobile'
+        'Mobile',
+        'Data Science'
     ]
+
+    const [nome, setNome] = useState('')
+    const [descricao, setDescricao] = useState('')
+    const [imagem, setImagem] = useState('')
+    const [time, setTime] = useState('')
+
+    const save = (evento) => {
+        evento.preventDefault()
+        props.ColaboradorCadastrado({
+            nome,
+            descricao,
+            imagem,
+            time
+        })
+    }
 
     return (
         <section className='formulario'>
-            <form>
+            <form onSubmit={save}>
                 <h2>Preencha os dados para criar o cargo do colaborador</h2>
-                <CampoTexto label="Nome" placeholder="Digite o nome"/>
-                <CampoTexto label="Cargo" placeholder="Digite a descrição"/>
-                <CampoTexto label="Imagem" placeholder="Digite o endereço da imagem"/>
-                <ListaSuspensa label="Time" itens={times}/>
+                <CampoTexto 
+                    obrigatorio={true} 
+                    label="Nome" 
+                    placeholder="Digite o nome"
+                    valor={nome}
+                    alterado={valor => setNome(valor)}
+                />
+                <CampoTexto
+                    obrigatorio={true} 
+                    label="Descrição" 
+                    placeholder="Digite a descrição"
+                    valor={descricao}
+                    alterado={valor => setDescricao(valor)}
+                />
+                <CampoTexto 
+                    label="Imagem" 
+                    placeholder="Digite o endereço da imagem"
+                    valor={imagem}
+                    alterado={valor => setImagem(valor)}
+                />
+                <ListaSuspensa 
+                    obrigatorio={true} 
+                    label="Time" itens={times}
+                    valor={time}
+                    alterado={valor => setTime(valor)}
+                />
                 <Botao>
                     Criar Card 
                 </Botao>
