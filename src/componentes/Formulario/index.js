@@ -19,12 +19,16 @@ const Formulario = (props) =>{
             imagem,
             time
         })
+        setNome('')
+        setDescricao('')
+        setImagem('')
+        setTime('')
     }
 
     return (
         <section className='formulario'>
             <form onSubmit={save}>
-                <h2>Preencha os dados para criar o cargo do colaborador</h2>
+                <h2>Preencha os dados para criar o colaborador</h2>
                 <CampoTexto 
                     obrigatorio={true} 
                     label="Nome" 
